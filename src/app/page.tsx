@@ -3,7 +3,6 @@
 import { RadioCircle } from '@/components/RadioCircle/RadioCircle'
 import React, { useState } from 'react'
 import c from './page.module.css'
-import Link from 'next/link'
 
 const HomePage = () => {
   const n: number = 5;
@@ -20,14 +19,12 @@ const HomePage = () => {
 
   const binary = arr.reduce((acc, cur) => acc + cur, '');
   const decimal = parseInt(binary, 2)
+
   return (
     <div>
-      <div>HomePage</div>
+      <div>Home Page</div>
       <hr />
-      <div>
-        <Link href="/clock">Go to clock page</Link>
-      </div>
-      <hr />
+
       <div className={c.binary}>
         {arr.map((n, index) => (
           <RadioCircle

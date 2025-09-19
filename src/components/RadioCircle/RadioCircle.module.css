@@ -1,11 +1,19 @@
-.wrapper {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  border: 5px solid #ffe600;
-  transition: all 0.5s ease;
+@property --hole {
+  syntax: '<percentage>';
+  initial-value: 100%;
+  inherits: false;
 }
 
-.active {
-  border: 5px solid #a65102;
+.wrapper {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ffe600;
+  border-radius: 50%;
+  --hole: 100%;
+  background: radial-gradient(circle at 50% 50%, transparent 0 var(--hole), #ffe600 0);
+  transition: --hole 0.3s ease;
+}
+
+.wrapper.active {
+  --hole: 0%;
 }
