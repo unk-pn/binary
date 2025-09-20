@@ -1,5 +1,6 @@
 "use client";
 
+import HowToPlay from "@/components/HowToPlay/HowToPlay";
 import { RadioCircle } from "@/components/RadioCircle/RadioCircle";
 import React, { useEffect, useState } from "react";
 
@@ -9,9 +10,10 @@ const GamePage = () => {
   const [score, setScore] = useState<number>(0);
   const [aim, setAim] = useState<number>(0);
   const [selectedSum, setSelectedSum] = useState<number>(0);
-
-  const n = 4;
-  const [binaryArr, setBinaryArr] = useState(Array(n).fill(0));
+  const [bits, setBits] = useState<number>(4);
+  const [binaryArr, setBinaryArr] = useState(Array(bits).fill(0));
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const RESET_DELAY = 400;
 
   const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
@@ -30,15 +32,29 @@ const GamePage = () => {
         return t - 1;
       });
     }, 1000);
-
-    return () => clearTimeout(id);
+    return () => clearInterval(id);
   }, [start]);
 
+  useEffect(() => {
+    setBinaryArr(Array(bits).fill(0));
+    setSelectedSum(0);
+  }, [bits]);
+
+  useEffect(() => {
+    const sum = binaryArr.reduce(
+      (acc, bit, i) => acc + bit * Math.pow(2, bits - 1 - i),
+      0
+    );
+    setSelectedSum(sum);
+  }, [binaryArr, bits]);
+
+  const maxValue = (1 << bits) - 1;
+
   const startGame = () => {
+    if (start) return;
     setStart(true);
-    setAim(getRandomInt(15) + 1);
+    setAim(getRandomInt(maxValue) + 1);
     setScore(0);
-    setBinaryArr(Array(n).fill(0));
     setSelectedSum(0);
   };
 
@@ -46,20 +62,15 @@ const GamePage = () => {
     setStart(false);
     setTime(60);
     setScore(0);
-    setBinaryArr(Array(n).fill(0));
     setSelectedSum(0);
   };
 
   const handleClick = (idx: number) => {
+    if (!start || isAnimating) return;
     setBinaryArr((arr) => {
-      const newArr = [...arr];
-      newArr[idx] = newArr[idx] === 1 ? 0 : 1;
-
-      setSelectedSum(
-        newArr.reduce((acc, bit, i) => acc + bit * (1 << (n - 1 - i)), 0)
-      );
-
-      return newArr;
+      const next = [...arr];
+      next[idx] = next[idx] ? 0 : 1;
+      return next;
     });
   };
 
@@ -74,15 +85,37 @@ const GamePage = () => {
   }, [decimal, start, aim]);
 
   const handleCorrectAnswer = () => {
-    setAim(getRandomInt(15) + 1);
-    setScore((s) => s + 1);
-    setTimeout(() => setBinaryArr(Array(n).fill(0)), 300);
-    setSelectedSum(0);
+    setTime((t) => Math.min(t + 3, 60));
+
+    setScore((s) => {
+      const nextScore = s + 1;
+      const willUpgrade = nextScore % 5 === 0;
+      const nextBits = willUpgrade ? bits + 2 : bits;
+
+      setIsAnimating(true);
+
+      setTimeout(() => {
+        if (willUpgrade) {
+          setBits(nextBits);
+        } else {
+          setBinaryArr(Array(bits).fill(0));
+        }
+
+        const newMax = (1 << nextBits) - 1;
+        setAim(getRandomInt(newMax) + 1);
+
+        setIsAnimating(false);
+      }, RESET_DELAY);
+
+      return nextScore;
+    });
   };
 
   return (
     <div>
       <div>Game Page</div>
+      <hr />
+      <HowToPlay />
       <hr />
 
       {!start ? (
