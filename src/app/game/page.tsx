@@ -1,5 +1,6 @@
 "use client";
 
+import { GameOver } from "@/components/GameOver/GameOver";
 import HowToPlay from "@/components/HowToPlay/HowToPlay";
 import { RadioCircle } from "@/components/RadioCircle/RadioCircle";
 import React, { useEffect, useState } from "react";
@@ -14,6 +15,7 @@ const GamePage = () => {
   const [binaryArr, setBinaryArr] = useState(Array(bits).fill(0));
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const [maxValue, setMaxValue] = useState<number>((1 << bits) - 1);
+  const [gameOver, setGameOver] = useState<boolean>(false);
   const RESET_DELAY = 400;
 
   const getRandomInt = (max: number) => {
@@ -28,6 +30,7 @@ const GamePage = () => {
         if (t <= 1) {
           clearInterval(id);
           setStart(false);
+          setGameOver(true);
           return 0;
         }
         return t - 1;
@@ -59,13 +62,14 @@ const GamePage = () => {
     setBinaryArr(Array(bits).fill(0));
     setIsAnimating(false);
     setMaxValue((1 << bits) - 1);
+    setGameOver(false);
   };
 
   const stopGame = () => {
     setStart(false);
     setTime(60);
-    setScore(0);
     setSelectedSum(0);
+    setGameOver(true);
   };
 
   const handleClick = (idx: number) => {
@@ -85,6 +89,10 @@ const GamePage = () => {
     if (decimal === aim) {
       handleCorrectAnswer();
     }
+    if (decimal > aim) {
+      stopGame();
+    }
+    console.log(decimal, start, aim);
   }, [decimal, start, aim]);
 
   const handleCorrectAnswer = () => {
@@ -116,6 +124,7 @@ const GamePage = () => {
 
   return (
     <div>
+      {gameOver && <GameOver score={score} />}
       <div>Game Page</div>
       <hr />
       <HowToPlay />
