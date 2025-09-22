@@ -49,8 +49,6 @@ const GamePage = () => {
     setSelectedSum(sum);
   }, [binaryArr, bits]);
 
-  // const maxValue = (1 << bits) - 1;
-
   const startGame = () => {
     if (start) return;
     setStart(true);
