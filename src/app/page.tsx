@@ -1,44 +1,58 @@
-'use client'
+"use client";
 
-import { RadioCircle } from '@/components/RadioCircle/RadioCircle'
-import React, { useState } from 'react'
-import c from './page.module.css'
+import { RadioCircle } from "@/components/RadioCircle/RadioCircle";
+import { useClock } from "@/hooks/useClock";
+import React from "react";
 
 const HomePage = () => {
-  const n: number = 5;
-  type arrType = 1 | 0;
-  const [arr, setArr] = useState<arrType[]>(Array(n).fill(0));
-  
-  const handleClick = (n: number) => {
-    setArr(arr => {
-      const newArr = [...arr];
-      newArr[n] = newArr[n] === 1 ? 0 : 1;
-      return newArr;
-    })
-  }
+  const { hours, minutes, seconds } = useClock();
 
-  const binary = arr.reduce((acc, cur) => acc + cur, '');
-  const decimal = parseInt(binary, 2)
+  const hoursArr = hours.toString(2).padStart(5, "0").split("");
+  const minutesArr = minutes.toString(2).padStart(6, "0").split("");
+  const secondsArr = seconds.toString(2).padStart(6, "0").split("");
 
+  console.log(hoursArr);
   return (
     <div>
       <div>Home Page</div>
       <hr />
 
-      <div className={c.binary}>
-        {arr.map((n, index) => (
-          <RadioCircle
-            key={index}
-            index={index}
-            onClick={handleClick}
-            selected={arr[index]}
-          />
-        ))}
+      <div>
+        {hours.toString().padStart(2, "0")}:
+        {minutes.toString().padStart(2, "0")}:
+        {seconds.toString().padStart(2, "0")}
       </div>
-      <div>binary: {binary}</div>
-      <div>decimal: {decimal}</div>
+      <div>
+        <div>{hours.toString(2).padStart(5, "0")}</div>
+        <div>{minutes.toString(2).padStart(6, "0")}</div>
+        <div>{seconds.toString(2).padStart(6, "0")}</div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ display: "flex", gap: "5px" }}>
+          {hoursArr.map((n, index) => (
+            <RadioCircle key={index} index={index} selected={+n} />
+          ))}
+        </div>
+        <div style={{ display: "flex", gap: "5px" }}>
+          {minutesArr.map((n, index) => (
+            <RadioCircle key={index} index={index} selected={+n} />
+          ))}
+        </div>
+        <div style={{ display: "flex", gap: "5px" }}>
+          {secondsArr.map((n, index) => (
+            <RadioCircle key={index} index={index} selected={+n} />
+          ))}
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default HomePage
+export default HomePage;

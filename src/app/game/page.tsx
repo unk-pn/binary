@@ -13,6 +13,7 @@ const GamePage = () => {
   const [bits, setBits] = useState<number>(4);
   const [binaryArr, setBinaryArr] = useState(Array(bits).fill(0));
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const [maxValue, setMaxValue] = useState<number>((1 << bits) - 1);
   const RESET_DELAY = 400;
 
   const getRandomInt = (max: number) => {
@@ -48,7 +49,7 @@ const GamePage = () => {
     setSelectedSum(sum);
   }, [binaryArr, bits]);
 
-  const maxValue = (1 << bits) - 1;
+  // const maxValue = (1 << bits) - 1;
 
   const startGame = () => {
     if (start) return;
@@ -56,6 +57,10 @@ const GamePage = () => {
     setAim(getRandomInt(maxValue) + 1);
     setScore(0);
     setSelectedSum(0);
+    setBits(4);
+    setBinaryArr(Array(bits).fill(0));
+    setIsAnimating(false);
+    setMaxValue((1 << bits) - 1);
   };
 
   const stopGame = () => {
@@ -90,7 +95,7 @@ const GamePage = () => {
     setScore((s) => {
       const nextScore = s + 1;
       const willUpgrade = nextScore % 5 === 0;
-      const nextBits = willUpgrade ? bits + 2 : bits;
+      const nextBits = willUpgrade ? bits + 1 : bits;
 
       setIsAnimating(true);
 
@@ -132,7 +137,7 @@ const GamePage = () => {
           <div>Score: {score}</div>
           <div>Aim: {aim - selectedSum}</div>
           <div style={{ display: "flex", gap: "10px" }}>
-            {binaryArr.map((n, index) => (
+            {binaryArr.map((_, index) => (
               <RadioCircle
                 key={index}
                 index={index}
@@ -143,7 +148,6 @@ const GamePage = () => {
           </div>
           <div>Binary: {binary}</div>
           <div>Decimal: {isNaN(decimal) ? 0 : decimal}</div>
-          <div>Selected: {selectedSum}</div>
         </div>
       )}
     </div>

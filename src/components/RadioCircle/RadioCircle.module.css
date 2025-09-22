@@ -4,7 +4,7 @@
   inherits: false;
 }
 
-.wrapper {
+/* .wrapper {
   width: 20px;
   height: 20px;
   border: 2px solid #1d4ed8;
@@ -12,7 +12,7 @@
   --hole: 100%;
   background: radial-gradient(circle at 50% 50%, transparent 0 var(--hole), #1d4ed8 0);
   transition: --hole 0.3s ease;
-}
+} */
 
 .wrapper.active {
   --hole: 0%;
