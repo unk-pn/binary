@@ -3,6 +3,7 @@
 import { GameOver } from "@/components/GameOver/GameOver";
 import HowToPlay from "@/components/HowToPlay/HowToPlay";
 import { RadioCircle } from "@/components/RadioCircle/RadioCircle";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import React, { useEffect, useState } from "react";
 
 const GamePage = () => {
@@ -130,33 +131,44 @@ const GamePage = () => {
       <HowToPlay />
       <hr />
 
-      {!start ? (
-        <div>Click Start game to begin.</div>
-      ) : (
-        <div>Game started! You have {time} seconds left.</div>
-      )}
-      <button disabled={start} onClick={() => startGame()}>
-        Start game
-      </button>
-      {start && (
-        <div>
-          <button onClick={() => stopGame()}>Stop game</button>
-          <div>Score: {score}</div>
-          <div>Aim: {aim - selectedSum}</div>
-          <div style={{ display: "flex", gap: "10px" }}>
-            {binaryArr.map((_, index) => (
-              <RadioCircle
-                key={index}
-                index={index}
-                onClick={handleClick}
-                selected={binaryArr[index]}
-              />
-            ))}
+      <SignedIn>
+        {!start ? (
+          <div>Click Start game to begin.</div>
+        ) : (
+          <div>Game started! You have {time} seconds left.</div>
+        )}
+        <button disabled={start} onClick={() => startGame()}>
+          Start game
+        </button>
+        {start && (
+          <div>
+            <button onClick={() => stopGame()}>Stop game</button>
+            <div>Score: {score}</div>
+            <div>Aim: {aim - selectedSum}</div>
+            <div style={{ display: "flex", gap: "10px" }}>
+              {binaryArr.map((_, index) => (
+                <RadioCircle
+                  key={index}
+                  index={index}
+                  onClick={handleClick}
+                  selected={binaryArr[index]}
+                />
+              ))}
+            </div>
+            <div>Binary: {binary}</div>
+            <div>Decimal: {isNaN(decimal) ? 0 : decimal}</div>
           </div>
-          <div>Binary: {binary}</div>
-          <div>Decimal: {isNaN(decimal) ? 0 : decimal}</div>
+        )}
+      </SignedIn>
+      <SignedOut>
+        <div>
+          <h1>Please sign in to play the game</h1>
+          <h2>
+            By signing in, you can save your progress and compete with others!
+          </h2>
+          <SignInButton />
         </div>
-      )}
+      </SignedOut>
     </div>
   );
 };

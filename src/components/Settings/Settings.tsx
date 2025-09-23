@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import c from "./Settings.module.css";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export const Settings = () => {
   const [open, setOpen] = useState(false);
@@ -34,17 +35,28 @@ export const Settings = () => {
             <button onClick={() => setOpen(false)} className={c.closeBtn}>
               ✖
             </button>
-            <h2 className={c.title}>Settings</h2>
-            <div>
-              <label>
-                <input
-                  type="color"
-                  value={circleColor}
-                  onChange={handleColorChange}
-                />
-                Circle Color
-              </label>
-              <button onClick={resetColor}>Reset</button>
+            <div className={c.header}>
+              <h2 className={c.title}>Settings</h2>
+              <SignedIn>
+                <UserButton showName />
+              </SignedIn>
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+            </div>
+
+            <div className={c.settings}>
+              <div className={c.colorChange}>
+                <label>
+                  <input
+                    type="color"
+                    value={circleColor}
+                    onChange={handleColorChange}
+                  />{" "}
+                  Circle Color
+                </label>
+                <button onClick={resetColor}>Reset color</button>
+              </div>
             </div>
           </div>
         </div>
