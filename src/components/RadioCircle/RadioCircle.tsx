@@ -10,6 +10,12 @@ interface RadioCircleProps {
 }
 
 export const RadioCircle = ({ onClick, index, selected }: RadioCircleProps) => {
+  // Безопасное получение цвета
+  const circleColor =
+    typeof window !== "undefined"
+      ? localStorage.getItem("circleColor") || "#1d4ed8"
+      : "#1d4ed8";
+
   return (
     <div
       onClick={onClick ? () => onClick(index) : undefined}
@@ -20,10 +26,10 @@ export const RadioCircle = ({ onClick, index, selected }: RadioCircleProps) => {
         .${c.wrapper} {
           width: 20px;
           height: 20px;
-          border: 2px solid ${localStorage.getItem("circleColor") || "#1d4ed8"};
+          border: 2px solid ${circleColor};
           border-radius: 50%;
           --hole: 100%;
-          background: radial-gradient(circle at 50% 50%, transparent 0 var(--hole), ${localStorage.getItem("circleColor") || "#1d4ed8"} 0);
+          background: radial-gradient(circle at 50% 50%, transparent 0 var(--hole), ${circleColor} 0);
           transition: --hole 0.3s ease;
         }
       `}

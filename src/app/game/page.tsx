@@ -3,7 +3,8 @@
 import { GameOver } from "@/components/GameOver/GameOver";
 import HowToPlay from "@/components/HowToPlay/HowToPlay";
 import { RadioCircle } from "@/components/RadioCircle/RadioCircle";
-import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { useStorage } from "@/hooks/useStorage";
+import { SignedIn, SignedOut, SignInButton, useUser } from "@clerk/nextjs";
 import React, { useEffect, useState } from "react";
 
 const GamePage = () => {
@@ -11,17 +12,38 @@ const GamePage = () => {
   const [time, setTime] = useState<number>(60);
   const [score, setScore] = useState<number>(0);
   const [aim, setAim] = useState<number>(0);
-  const [selectedSum, setSelectedSum] = useState<number>(0);
   const [bits, setBits] = useState<number>(4);
   const [binaryArr, setBinaryArr] = useState(Array(bits).fill(0));
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const [maxValue, setMaxValue] = useState<number>((1 << bits) - 1);
   const [gameOver, setGameOver] = useState<boolean>(false);
+  const [record, setRecord] = useState<number>(0);
+  const storage = useStorage();
+  const { user } = useUser();
   const RESET_DELAY = 400;
 
   const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
   };
+
+  useEffect(() => {
+    const localRecord = storage?.getItem("record");
+    if (localRecord) {
+      setRecord(Number(localRecord));
+    }
+
+    if (user?.id) {
+      fetch("/api/user-record")
+        .then((res) => res.json())
+        .then((data) => {
+          const currentLocal = Number(storage?.getItem("record") || "0");
+          if (data.record > currentLocal) {
+            setRecord(data.record);
+            storage?.setItem("record", data.record.toString());
+          }
+        });
+    }
+  }, [user?.id]);
 
   useEffect(() => {
     if (!start) return;
@@ -42,23 +64,30 @@ const GamePage = () => {
 
   useEffect(() => {
     setBinaryArr(Array(bits).fill(0));
-    setSelectedSum(0);
   }, [bits]);
 
-  useEffect(() => {
-    const sum = binaryArr.reduce(
-      (acc, bit, i) => acc + bit * Math.pow(2, bits - 1 - i),
-      0
-    );
-    setSelectedSum(sum);
-  }, [binaryArr, bits]);
+  const updateRecord = async (newScore: number) => {
+    if (newScore > record) {
+      setRecord(newScore);
+      storage?.setItem("record", newScore.toString());
+
+      try {
+        await fetch("/api/update-record", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ newRecord: newScore }),
+        });
+      } catch (error) {
+        console.error("Failed to sync with server:", error);
+      }
+    }
+  };
 
   const startGame = () => {
     if (start) return;
     setStart(true);
     setAim(getRandomInt(maxValue) + 1);
     setScore(0);
-    setSelectedSum(0);
     setBits(4);
     setBinaryArr(Array(bits).fill(0));
     setIsAnimating(false);
@@ -69,7 +98,7 @@ const GamePage = () => {
   const stopGame = () => {
     setStart(false);
     setTime(60);
-    setSelectedSum(0);
+    updateRecord(score);
     setGameOver(true);
   };
 
@@ -93,7 +122,6 @@ const GamePage = () => {
     if (decimal > aim) {
       stopGame();
     }
-    console.log(decimal, start, aim);
   }, [decimal, start, aim]);
 
   const handleCorrectAnswer = () => {
@@ -109,11 +137,14 @@ const GamePage = () => {
       setTimeout(() => {
         if (willUpgrade) {
           setBits(nextBits);
+          setBinaryArr(Array(nextBits).fill(0)); // Создаем массив правильного размера
         } else {
           setBinaryArr(Array(bits).fill(0));
         }
 
-        const newMax = (1 << nextBits) - 1;
+        // Используем правильное количество битов для расчета максимального значения
+        const correctBits = willUpgrade ? nextBits : bits;
+        const newMax = (1 << correctBits) - 2;
         setAim(getRandomInt(newMax) + 1);
 
         setIsAnimating(false);
@@ -130,6 +161,7 @@ const GamePage = () => {
       <hr />
       <HowToPlay />
       <hr />
+      <h1>Your record: {record}</h1>
 
       <SignedIn>
         {!start ? (
@@ -144,7 +176,7 @@ const GamePage = () => {
           <div>
             <button onClick={() => stopGame()}>Stop game</button>
             <div>Score: {score}</div>
-            <div>Aim: {aim - selectedSum}</div>
+            <div>Aim: {aim - decimal}</div>
             <div style={{ display: "flex", gap: "10px" }}>
               {binaryArr.map((_, index) => (
                 <RadioCircle
