@@ -12,13 +12,23 @@ export async function GET() {
         { status: 401 }
       );
     }
+
     const user = await db.user.findUnique({
-      where: { clerkId: clerkUser?.id },
+      where: { clerkId: clerkUser.id },
     });
-    return NextResponse.json({ record: user?.record });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({
+      record: user.record,
+      imageUrl: user.imageUrl,
+      name: user.name,
+    });
   } catch {
     return NextResponse.json(
-      { error: "Failed to fetch user" },
+      { error: "Failed to fetch user record" },
       { status: 500 }
     );
   }

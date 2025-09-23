@@ -31,7 +31,8 @@ export default function RootLayout({
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
           <div>
             <Link href="/">Go to home page</Link> <br />
-            <Link href="/game">Go to game page</Link>
+            <Link href="/game">Go to game page</Link> <br />
+            <Link href="/leaderboard">Go to leaderboard page</Link>
             <Settings />
           </div>
           <hr />
