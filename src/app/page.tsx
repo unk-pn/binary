@@ -10,8 +10,6 @@ const HomePage = () => {
   const hoursArr = hours.toString(2).padStart(5, "0").split("");
   const minutesArr = minutes.toString(2).padStart(6, "0").split("");
   const secondsArr = seconds.toString(2).padStart(6, "0").split("");
-
-  console.log(hoursArr);
   return (
     <div>
       <div>Home Page</div>

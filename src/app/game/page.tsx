@@ -42,8 +42,18 @@ const GamePage = () => {
             storage?.setItem("record", data.record.toString());
           }
         });
+
+        const currUserId = user?.id;
+        const lastUserId = storage?.getItem("lastUserId");
+        if (currUserId && lastUserId && currUserId !== lastUserId) {
+          storage?.removeItem("record");
+        }
+
+        if (currUserId) {
+          storage?.setItem("lastUserId", currUserId);
+        }
     }
-  }, [user?.id]);
+  }, [user?.id, storage]);
 
   useEffect(() => {
     if (!start) return;
@@ -137,12 +147,11 @@ const GamePage = () => {
       setTimeout(() => {
         if (willUpgrade) {
           setBits(nextBits);
-          setBinaryArr(Array(nextBits).fill(0)); // Создаем массив правильного размера
+          setBinaryArr(Array(nextBits).fill(0));
         } else {
           setBinaryArr(Array(bits).fill(0));
         }
 
-        // Используем правильное количество битов для расчета максимального значения
         const correctBits = willUpgrade ? nextBits : bits;
         const newMax = (1 << correctBits) - 2;
         setAim(getRandomInt(newMax) + 1);
@@ -161,9 +170,9 @@ const GamePage = () => {
       <hr />
       <HowToPlay />
       <hr />
-      <h1>Your record: {record}</h1>
 
       <SignedIn>
+      <h1>Your record: {record}</h1>
         {!start ? (
           <div>Click Start game to begin.</div>
         ) : (
