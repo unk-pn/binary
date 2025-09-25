@@ -49,11 +49,6 @@ export default function HowToPlay() {
               <RadioCircle index={2} selected={0} />
               <RadioCircle index={3} selected={1} />
             </div>
-            <img
-              className={c.image}
-              src="https://i0.wp.com/blog.doublehelix.csiro.au/wp-content/uploads/2014/01/binary1.jpg?ssl=1"
-              alt="binary"
-            />
             <p className={c.text}>
               Remember, accuracy and speed are key! The faster you convert the
               number, the higher your score. Good luck!

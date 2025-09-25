@@ -7,6 +7,7 @@ export async function GET() {
       orderBy: { record: "desc" },
       take: 100,
       select: {
+        id: true,
         name: true,
         imageUrl: true,
         record: true,

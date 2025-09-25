@@ -4,6 +4,7 @@ import { LeaderboardPlace } from "@/components/LeaderboardPlace/LeaderboardPlace
 import React, { useEffect, useState } from "react";
 
 type LeaderboardUser = {
+  id: string;
   name: string;
   imageUrl: string;
   record: number;
@@ -17,7 +18,7 @@ const LeaderboardPage = () => {
       .then((data) => {
         setLeaderboard(data.leaderboard);
       });
-  }, [leaderboard]);
+  }, []);
   return (
     <div>
       <h1>Leaderboard</h1>

@@ -8,6 +8,9 @@ import { useUser } from "@clerk/nextjs";
 export const Settings = () => {
   const [open, setOpen] = useState(false);
   const storage = typeof window !== "undefined" ? localStorage : null;
+    const [theme, setTheme] = useState(
+      storage?.getItem("theme") || "dark"
+    );
   const [circleColor, setCircleColor] = useState<string>(
     storage?.getItem("circleColor") || "#1d4ed8"
   );
@@ -40,6 +43,13 @@ export const Settings = () => {
     storage?.setItem("circleColor", newColor);
     setCircleColor(newColor);
   };
+
+  const handleThemeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newTheme = e.target.value as "light" | "dark";
+    setTheme(newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    storage?.setItem("theme", newTheme);
+  }
 
   return (
     <div className={c.page}>
@@ -74,6 +84,27 @@ export const Settings = () => {
                   Circle Color
                 </label>
                 <button onClick={resetColor}>Reset color</button>
+              </div>
+              <div className={c.themeChange}>
+                <span>Theme:</span>
+                <label>
+                  <input
+                    type="radio"
+                    value="light"
+                    checked={theme === "light"}
+                    onChange={handleThemeChange}
+                  />{" "}
+                  Light
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="dark"
+                    checked={theme === "dark"}
+                    onChange={handleThemeChange}
+                  />{" "}
+                  Dark
+                </label>
               </div>
             </div>
           </div>
