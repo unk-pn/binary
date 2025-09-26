@@ -4,105 +4,319 @@
 }
 
 .openBtn {
-  padding: 10px 20px;
-  background: #2563eb;
+  padding: 0.75rem 1.5rem;
+  background: var(--accent-color);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 12px;
   cursor: pointer;
-}
-
-.openBtn:hover {
-  background: #1d4ed8;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
 }
 
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
 }
 
 .modal {
-  background: white;
-  padding: 24px;
-  border-radius: 10px;
+  background: var(--bg-primary);
+  padding: 2rem;
+  border-radius: 24px;
   position: relative;
-  width: 400px;
+  width: 480px;
   max-width: 90vw;
-  max-height: 70vh;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-height: 80vh;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
   overflow-y: auto;
+  animation: slideIn 0.3s ease;
 }
 
 .closeBtn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 1rem;
+  right: 1rem;
   border: none;
-  background: transparent;
-  font-size: 18px;
+  background: var(--bg-secondary);
+  font-size: 1.125rem;
   cursor: pointer;
-  color: #555;
-  padding-bottom: 200px;
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
 }
 
 .closeBtn:hover {
-  color: #000;
+  background: #ef4444;
+  color: white;
+  transform: scale(1.1);
 }
 
 .header {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  margin-top: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.userSection {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
 .title {
-  margin-bottom: 12px;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  text-align: left;
+  display: flex;
+  align-items: center;
 }
 
 .settings {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 2rem;
+}
+
+.settingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.settingLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
 }
 
 .colorChange {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.colorInputGroup {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 30px;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
 }
 
-.text {
-  font-size: 16px;
-  color: #333;
+.colorInput {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--border-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  padding: 0;
+  overflow: hidden;
 }
 
-.example {
-  font-size: 24px;
-  font-weight: bold;
-  color: #1d4ed8;
+.colorInput::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+}
+
+.colorInput::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+.colorInput::-moz-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+.colorInput:hover {
+  transform: scale(1.1);
+  border-color: var(--accent-color);
+}
+
+.colorLabel {
+  font-weight: 500;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.resetButton {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 2px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.resetButton:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.themeChange {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.themeOptions {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.themeOption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.themeOption input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-color);
+  outline: none;
+}
+
+.themeOption input[type="radio"]:focus {
+  outline: none;
+}
+
+.themeOption input[type="radio"]:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.preview {
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  margin-top: 1rem;
+}
+
+.previewTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .binary {
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
+  justify-content: center;
 }
 
-.image {
-  margin-top: 20px;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal {
+    padding: 1.5rem;
+    width: 95vw;
+    max-height: 90vh;
+  }
+
+  .colorInputGroup,
+  .themeOptions {
+    padding: 0.75rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .colorInputGroup {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .themeOptions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 }

@@ -2,14 +2,27 @@ import { useEffect, useState } from "react";
 
 export const useClock = () => {
   const [date, setDate] = useState(new Date());
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // Отмечаем, что компонент смонтирован на клиенте
+    setIsClient(true);
+
     const timer = setInterval(() => {
       setDate(new Date());
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
+
+  // Во время серверного рендеринга возвращаем статичные значения
+  if (!isClient) {
+    return {
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    };
+  }
 
   let hours: number | string = date.getHours();
   let minutes: number | string = date.getMinutes();

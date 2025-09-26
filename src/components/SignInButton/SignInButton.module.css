@@ -1,0 +1,196 @@
+/* SignIn Button Component Styles */
+.wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.button {
+  background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: inherit;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 16px;
+}
+
+.button:hover::before {
+  opacity: 1;
+}
+
+.button:active {
+  transform: translateY(-1px);
+}
+
+.icon {
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.button:hover .icon {
+  transform: scale(1.1);
+}
+
+.text {
+  font-size: inherit;
+  font-weight: inherit;
+  position: relative;
+  z-index: 2;
+}
+
+.shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: all 0.6s ease;
+  z-index: 1;
+}
+
+.button:hover .shine {
+  left: 100%;
+}
+
+/* Size Variations */
+.small {
+  font-size: 0.875rem;
+}
+
+.small .button {
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  gap: 0.5rem;
+}
+
+.small .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.medium {
+  font-size: 1rem;
+}
+
+.medium .button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 14px;
+  gap: 0.75rem;
+}
+
+.medium .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.large {
+  font-size: 1.125rem;
+}
+
+.large .button {
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  gap: 0.75rem;
+}
+
+.large .icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Variant Styles */
+.primary .button {
+  background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
+  color: white;
+}
+
+.primary .button::before {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+}
+
+.secondary .button {
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.secondary .button::before {
+  background: var(--bg-secondary);
+}
+
+.secondary .button:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* Loading State */
+.loading .button {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.loading .icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .button {
+    width: 100%;
+    justify-content: center;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .large .button,
+  .medium .button {
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+  }
+}

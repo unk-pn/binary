@@ -10,7 +10,7 @@ export default function HowToPlay() {
   return (
     <div className={c.page}>
       <button onClick={() => setOpen(true)} className={c.openBtn}>
-        How to play
+        How to Play
       </button>
 
       {open && (
@@ -53,7 +53,7 @@ export default function HowToPlay() {
               Remember, accuracy and speed are key! The faster you convert the
               number, the higher your score. Good luck!
             </p>
-            <button onClick={() => setOpen(false)} className={c.openBtn}>
+            <button onClick={() => setOpen(false)} className={c.gotItBtn}>
               Got it!
             </button>
           </div>

@@ -11,6 +11,7 @@ export async function GET() {
         name: true,
         imageUrl: true,
         record: true,
+        clerkId: true,
       },
     });
     return NextResponse.json({ leaderboard });

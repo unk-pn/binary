@@ -7,33 +7,35 @@ interface RadioCircleProps {
   index: number;
   onClick?: (n: number) => void;
   selected?: 1 | 0 | string | number;
+  size?: "small" | "medium" | "large";
 }
 
-export const RadioCircle = ({ onClick, index, selected }: RadioCircleProps) => {
-  // Безопасное получение цвета
+export const RadioCircle = ({
+  onClick,
+  index,
+  selected,
+  size = "medium",
+}: RadioCircleProps) => {
   const circleColor =
     typeof window !== "undefined"
-      ? localStorage.getItem("circleColor") || "#1d4ed8"
-      : "#1d4ed8";
+      ? localStorage.getItem("circleColor") || "#3b82f6"
+      : "#3b82f6";
+
+  const wrapperClasses = [c.wrapper, c[size], selected === 1 ? c.active : ""]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div
       onClick={onClick ? () => onClick(index) : undefined}
-      className={selected === 1 ? `${c.active} ${c.wrapper}` : c.wrapper}
-    >
-      <style>
-        {`
-        .${c.wrapper} {
-          width: 20px;
-          height: 20px;
-          border: 2px solid ${circleColor};
-          border-radius: 50%;
-          --hole: 100%;
-          background: radial-gradient(circle at 50% 50%, transparent 0 var(--hole), ${circleColor} 0);
-          transition: --hole 0.3s ease;
-        }
-      `}
-      </style>
-    </div>
+      className={wrapperClasses}
+      style={
+        {
+          "--circle-color": circleColor,
+        } as React.CSSProperties
+      }
+      aria-label={`Binary digit ${selected === 1 ? "1" : "0"}`}
+      role={onClick ? "button" : "presentation"}
+    />
   );
 };
