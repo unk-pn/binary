@@ -5,7 +5,6 @@ import { useClock } from "@/hooks/useClock";
 import React from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
-import HowToPlay from "@/components/HowToPlay/HowToPlay";
 
 const HomePage = () => {
   const { hours, minutes, seconds } = useClock();
@@ -76,7 +75,6 @@ const HomePage = () => {
         <Link href="/leaderboard" className={styles.secondaryButton}>
           View Leaderboard
         </Link>
-
       </section>
     </div>
   );

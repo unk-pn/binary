@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import c from "./LeaderboardPlace.module.css";
 import { useUser } from "@clerk/nextjs";
 
@@ -8,7 +7,7 @@ interface LeaderboardPlaceProps {
   name: string;
   imageUrl: string;
   record: number;
-  userId?: string; // Добавляем userId для сравнения
+  userId?: string;
 }
 
 export const LeaderboardPlace = ({
@@ -45,7 +44,7 @@ export const LeaderboardPlace = ({
         return c.place;
     }
   };
-
+    
   return (
     <div className={c.wrapper}>
       <div className={c.leftSection}>
