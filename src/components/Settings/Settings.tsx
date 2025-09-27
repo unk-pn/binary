@@ -131,25 +131,28 @@ export const Settings = () => {
 
             <div className={c.settings}>
               <div className={c.settingGroup}>
-                <div className={c.settingLabel}>Language</div>
+                <div className={c.settingLabel}>Theme</div>
                 <div className={c.languageChange}>
                   <div className={c.languageToggle}>
                     <span
                       className={`${c.languageLabel} ${
-                        language === "en" ? c.active : ""
+                        theme === "light" ? c.active : ""
                       }`}
                     >
-                      🇺🇸
+                      ☀️ Light
                     </span>
                     <label className={c.toggle}>
                       <input
                         type="checkbox"
-                        checked={language === "ru"}
+                        checked={theme === "dark"}
                         onChange={(e) => {
-                          const newLanguage = e.target.checked ? "ru" : "en";
-                          setLanguage(newLanguage);
-                          i18n.changeLanguage(newLanguage);
-                          storage?.setItem("language", newLanguage);
+                          const newTheme = e.target.checked ? "dark" : "light";
+                          setTheme(newTheme);
+                          document.documentElement.classList.toggle(
+                            "dark",
+                            newTheme === "dark"
+                          );
+                          storage?.setItem("theme", newTheme);
                         }}
                         className={c.toggleInput}
                       />
@@ -157,11 +160,45 @@ export const Settings = () => {
                     </label>
                     <span
                       className={`${c.languageLabel} ${
-                        language === "ru" ? c.active : ""
+                        theme === "dark" ? c.active : ""
                       }`}
                     >
-                      🇷🇺
+                      🌙 Dark
                     </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className={c.settingGroup}>
+                <div className={c.settingLabel}>Language</div>
+                <div className={c.themeChange}>
+                  <div className={c.themeOptions}>
+                    <label className={c.themeOption}>
+                      <input
+                        type="radio"
+                        value="en"
+                        checked={language === "en"}
+                        onChange={() => {
+                          setLanguage("en");
+                          i18n.changeLanguage("en");
+                          storage?.setItem("language", "en");
+                        }}
+                      />
+                      🇺🇸
+                    </label>
+                    <label className={c.themeOption}>
+                      <input
+                        type="radio"
+                        value="dark"
+                        checked={language === "ru"}
+                        onChange={() => {
+                          setLanguage("ru");
+                          i18n.changeLanguage("ru");
+                          storage?.setItem("language", "ru");
+                        }}
+                      />
+                      🇷🇺
+                    </label>
                   </div>
                 </div>
               </div>
@@ -182,32 +219,6 @@ export const Settings = () => {
                     <button onClick={resetColor} className={c.resetButton}>
                       Reset
                     </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className={c.settingGroup}>
-                <div className={c.settingLabel}>Theme</div>
-                <div className={c.themeChange}>
-                  <div className={c.themeOptions}>
-                    <label className={c.themeOption}>
-                      <input
-                        type="radio"
-                        value="light"
-                        checked={theme === "light"}
-                        onChange={handleThemeChange}
-                      />
-                      Light
-                    </label>
-                    <label className={c.themeOption}>
-                      <input
-                        type="radio"
-                        value="dark"
-                        checked={theme === "dark"}
-                        onChange={handleThemeChange}
-                      />
-                      Dark
-                    </label>
                   </div>
                 </div>
               </div>
