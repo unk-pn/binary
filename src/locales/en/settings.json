@@ -1,0 +1,11 @@
+{
+  "title": "Settings",
+  "language": "Language",
+  "circleColor": "Circle Color",
+  "chooseColor": "Choose your preferred circle color",
+  "reset": "Reset",
+  "theme": "Theme",
+  "light": "Light",
+  "dark": "Dark",
+  "preview": "Preview"
+}

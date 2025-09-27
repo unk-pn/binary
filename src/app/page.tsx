@@ -5,9 +5,11 @@ import { useClock } from "@/hooks/useClock";
 import React from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
+import { useTranslation } from "react-i18next";
 
 const HomePage = () => {
   const { hours, minutes, seconds } = useClock();
+  const { t } = useTranslation("home");
 
   const hoursArr = hours.toString(2).padStart(5, "0").split("");
   const minutesArr = minutes.toString(2).padStart(6, "0").split("");
@@ -16,7 +18,8 @@ const HomePage = () => {
   return (
     <div className={styles.container}>
       <section className={styles.hero}>
-        <h1 className={styles.title}>Binary Clock</h1>
+        <h1 className={styles.title}>{t("title")}</h1>
+        {/* <h1 className={styles.title}>Binary Clock</h1> */}
         <p className={styles.subtitle}>
           Explore the fascinating world of binary time representation. Watch as
           every second transforms into beautiful binary patterns.

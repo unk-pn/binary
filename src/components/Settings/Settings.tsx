@@ -7,6 +7,7 @@ import { useUser } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { RadioCircle } from "../RadioCircle/RadioCircle";
 import { SignInButton } from "../SignInButton/SignInButton";
+import { useTranslation } from "react-i18next";
 
 export const Settings = () => {
   const [open, setOpen] = useState(false);
@@ -17,8 +18,18 @@ export const Settings = () => {
   );
   const { isSignedIn, user } = useUser();
   const [previewArray, setPreviewArray] = useState<(0 | 1)[]>([1, 1, 0, 1]);
+  const { i18n } = useTranslation();
+  const [language, setLanguage] = useState(i18n.language || "en");
+  const { t } = useTranslation("settings");
 
   useEffect(() => {
+    // Initialize language from localStorage
+    const savedLanguage = storage?.getItem("language") || "en";
+    if (savedLanguage !== language) {
+      setLanguage(savedLanguage);
+      i18n.changeLanguage(savedLanguage);
+    }
+
     const syncUser = async () => {
       try {
         const response = await fetch("/api/sync-user", { method: "POST" });
@@ -32,7 +43,7 @@ export const Settings = () => {
     if (isSignedIn && user?.id) {
       syncUser();
     }
-  }, [isSignedIn, user?.id]);
+  }, [isSignedIn, user?.id, i18n, language, storage]);
 
   const resetColor = () => {
     const defaultColor = "#3b82f6";
@@ -57,12 +68,12 @@ export const Settings = () => {
     const newArray = [...previewArray];
     newArray[index] = newArray[index] === 1 ? 0 : 1;
     setPreviewArray(newArray);
-  }
+  };
 
   return (
     <div className={c.page}>
       <button onClick={() => setOpen(true)} className={c.openBtn}>
-        Settings
+        {t("title")}
       </button>
 
       {open && (
@@ -120,7 +131,43 @@ export const Settings = () => {
 
             <div className={c.settings}>
               <div className={c.settingGroup}>
-                <div className={c.settingLabel}>Circle Color</div>
+                <div className={c.settingLabel}>Language</div>
+                <div className={c.languageChange}>
+                  <div className={c.languageToggle}>
+                    <span
+                      className={`${c.languageLabel} ${
+                        language === "en" ? c.active : ""
+                      }`}
+                    >
+                      🇺🇸
+                    </span>
+                    <label className={c.toggle}>
+                      <input
+                        type="checkbox"
+                        checked={language === "ru"}
+                        onChange={(e) => {
+                          const newLanguage = e.target.checked ? "ru" : "en";
+                          setLanguage(newLanguage);
+                          i18n.changeLanguage(newLanguage);
+                          storage?.setItem("language", newLanguage);
+                        }}
+                        className={c.toggleInput}
+                      />
+                      <span className={c.toggleSlider}></span>
+                    </label>
+                    <span
+                      className={`${c.languageLabel} ${
+                        language === "ru" ? c.active : ""
+                      }`}
+                    >
+                      🇷🇺
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className={c.settingGroup}>
+                <div className={c.settingLabel}>{t("circleColor")}</div>
                 <div className={c.colorChange}>
                   <div className={c.colorInputGroup}>
                     <input
@@ -168,10 +215,30 @@ export const Settings = () => {
               <div className={c.preview}>
                 <div className={c.previewTitle}>Preview</div>
                 <div className={c.binary}>
-                  <RadioCircle index={0} selected={previewArray[0]} size="small" onClick={() => handlePreviewClick(0)} />
-                  <RadioCircle index={1} selected={previewArray[1]} size="small" onClick={() => handlePreviewClick(1)} />
-                  <RadioCircle index={2} selected={previewArray[2]} size="small" onClick={() => handlePreviewClick(2)} />
-                  <RadioCircle index={3} selected={previewArray[3]} size="small" onClick={() => handlePreviewClick(3)} />
+                  <RadioCircle
+                    index={0}
+                    selected={previewArray[0]}
+                    size="small"
+                    onClick={() => handlePreviewClick(0)}
+                  />
+                  <RadioCircle
+                    index={1}
+                    selected={previewArray[1]}
+                    size="small"
+                    onClick={() => handlePreviewClick(1)}
+                  />
+                  <RadioCircle
+                    index={2}
+                    selected={previewArray[2]}
+                    size="small"
+                    onClick={() => handlePreviewClick(2)}
+                  />
+                  <RadioCircle
+                    index={3}
+                    selected={previewArray[3]}
+                    size="small"
+                    onClick={() => handlePreviewClick(3)}
+                  />
                 </div>
               </div>
             </div>
