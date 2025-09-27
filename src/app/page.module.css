@@ -130,27 +130,14 @@
   transition: all 0.3s ease;
   box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
   position: relative;
-  overflow: hidden;
 }
 
-.ctaButton::before {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  content: "Play Binary Game";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.ctaButton:hover {
   background: #2563eb;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 12px;
 }
 
-.ctaButton:hover::before {
-  opacity: 1;
+.ctaButton:active {
+  transform: translateY(0);
 }
 
 .ctaButton > * {

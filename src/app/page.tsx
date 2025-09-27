@@ -19,15 +19,11 @@ const HomePage = () => {
     <div className={styles.container}>
       <section className={styles.hero}>
         <h1 className={styles.title}>{t("title")}</h1>
-        {/* <h1 className={styles.title}>Binary Clock</h1> */}
-        <p className={styles.subtitle}>
-          Explore the fascinating world of binary time representation. Watch as
-          every second transforms into beautiful binary patterns.
-        </p>
+        <p className={styles.subtitle}>{t("description")}</p>
       </section>
 
       <section className={styles.clockSection}>
-        <h2 className={styles.clockTitle}>Current Time</h2>
+        <h2 className={styles.clockTitle}>{t("currentTime")}</h2>
 
         <div className={styles.digitalClock}>
           {hours.toString().padStart(2, "0")}:
@@ -38,7 +34,9 @@ const HomePage = () => {
         <div className={styles.binarySection}>
           <div className={styles.binaryGroup}>
             <div className={styles.binaryLabelRow}>
-              <div className={styles.binaryLabel}>Hours ({hours})</div>
+              <div className={styles.binaryLabel}>
+                {t("hours")} ({hours})
+              </div>
               <div className={styles.binaryRow}>
                 {hoursArr.map((n, index) => (
                   <RadioCircle key={`h-${index}`} index={index} selected={+n} />
@@ -49,7 +47,9 @@ const HomePage = () => {
 
           <div className={styles.binaryGroup}>
             <div className={styles.binaryLabelRow}>
-              <div className={styles.binaryLabel}>Minutes ({minutes})</div>
+              <div className={styles.binaryLabel}>
+                {t("minutes")} ({minutes})
+              </div>
               <div className={styles.binaryRow}>
                 {minutesArr.map((n, index) => (
                   <RadioCircle key={`m-${index}`} index={index} selected={+n} />
@@ -60,7 +60,9 @@ const HomePage = () => {
 
           <div className={styles.binaryGroup}>
             <div className={styles.binaryLabelRow}>
-              <div className={styles.binaryLabel}>Seconds ({seconds})</div>
+              <div className={styles.binaryLabel}>
+                {t("seconds")} ({seconds})
+              </div>
               <div className={styles.binaryRow}>
                 {secondsArr.map((n, index) => (
                   <RadioCircle key={`s-${index}`} index={index} selected={+n} />
@@ -73,10 +75,10 @@ const HomePage = () => {
 
       <section className={styles.ctaSection}>
         <Link href="/game" className={styles.ctaButton}>
-          Play Binary Game
+          {t("play")}
         </Link>
         <Link href="/leaderboard" className={styles.secondaryButton}>
-          View Leaderboard
+          {t("viewLeaderboard")}
         </Link>
       </section>
     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import c from "./LeaderboardPlace.module.css";
 import { useUser } from "@clerk/nextjs";
+import { useTranslation } from "react-i18next";
 
 interface LeaderboardPlaceProps {
   place: number;
@@ -18,6 +19,7 @@ export const LeaderboardPlace = ({
   userId,
 }: LeaderboardPlaceProps) => {
   const { user } = useUser();
+  const { t } = useTranslation("leaderboard");
 
   const getPlaceIcon = (place: number) => {
     switch (place) {
@@ -57,10 +59,9 @@ export const LeaderboardPlace = ({
           className={c.avatar}
         />
         <div className={c.userInfo}>
-          <h3 className={c.name}>
-            {name} {user?.id === userId && "(You)"}
+          <h3 className={c.name} style={{ color: user?.id === userId ? "var(--accent-color)" : "" }}>
+            {name} {user?.id === userId && `(${t("you")})`}
           </h3>
-          <span className={c.recordLabel}>Best Score</span>
         </div>
       </div>
 

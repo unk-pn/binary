@@ -5,10 +5,12 @@ import c from "./Header.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Settings } from "../Settings/Settings";
+import { useTranslation } from "react-i18next";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { t } = useTranslation("header");
 
   const isActive = (path: string) => {
     return pathname === path;
@@ -39,7 +41,7 @@ export const Header = () => {
                 href="/"
                 className={`${c.navLink} ${isActive("/") ? c.active : ""}`}
               >
-                Home
+                {t("home")}
               </Link>
             </li>
             <li>
@@ -47,7 +49,7 @@ export const Header = () => {
                 href="/game"
                 className={`${c.navLink} ${isActive("/game") ? c.active : ""}`}
               >
-                Game
+                {t("game")}
               </Link>
             </li>
             <li>
@@ -57,7 +59,7 @@ export const Header = () => {
                   isActive("/leaderboard") ? c.active : ""
                 }`}
               >
-                Leaderboard
+                {t("leaderboard")}
               </Link>
             </li>
           </ul>
@@ -93,7 +95,7 @@ export const Header = () => {
                     }`}
                     onClick={closeMobileMenu}
                   >
-                    Home
+                    {t("home")}
                   </Link>
                 </li>
                 <li>
@@ -104,7 +106,7 @@ export const Header = () => {
                     }`}
                     onClick={closeMobileMenu}
                   >
-                    Game
+                    {t("game")}
                   </Link>
                 </li>
                 <li>
@@ -115,7 +117,7 @@ export const Header = () => {
                     }`}
                     onClick={closeMobileMenu}
                   >
-                    Leaderboard
+                    {t("leaderboard")}
                   </Link>
                 </li>
                 <li className={c.mobileSettings}>

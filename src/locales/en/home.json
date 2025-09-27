@@ -4,5 +4,7 @@
   "currentTime": "Current Time",
   "hours": "Hours",
   "minutes": "Minutes",
-  "seconds": "Seconds"
+  "seconds": "Seconds",
+  "play": "Play Binary Game",
+  "viewLeaderboard": "View Leaderboard"
 }

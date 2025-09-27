@@ -1,5 +1,9 @@
 {
   "title": "Leaderboard",
   "description": "See how you rank against other players in the binary challenge. Compete for the top spot and show off your binary mastery!",
-  "bestScore": "Best Score"
+  "loading": "Loading leaderboard...",
+  "beFirst": "Be the first to set a record in the binary game.",
+  "playNow": "Play Now",
+  "noScores": "No scores yet!",
+  "you": "You"
 }

@@ -4,5 +4,7 @@
   "currentTime": "Текущее время",
   "hours": "Часы",
   "minutes": "Минуты",
-  "seconds": "Секунды"
+  "seconds": "Секунды",
+  "play": "Сыграть в игру",
+  "viewLeaderboard": "Таблица лидеров"
 }

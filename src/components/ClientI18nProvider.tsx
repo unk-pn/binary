@@ -21,11 +21,12 @@ export function ClientI18nProvider({
           game: {},
           leaderboard: {},
           settings: {},
+          header: {},
         },
       },
       fallbackLng: "en",
       defaultNS: "home",
-      ns: ["home", "game", "leaderboard", "settings"],
+      ns: ["home", "game", "leaderboard", "settings", "header"],
     });
     return fallbackInstance;
   });
@@ -43,17 +44,19 @@ export function ClientI18nProvider({
       const leaderboardEn = (await import("../locales/en/leaderboard.json"))
         .default;
       const settingsEn = (await import("../locales/en/settings.json")).default;
+      const headerEn = (await import("../locales/en/header.json")).default;
 
       const homeRu = (await import("../locales/ru/home.json")).default;
       const gameRu = (await import("../locales/ru/game.json")).default;
       const leaderboardRu = (await import("../locales/ru/leaderboard.json"))
         .default;
       const settingsRu = (await import("../locales/ru/settings.json")).default;
+      const headerRu = (await import("../locales/ru/header.json")).default;
 
       // Create a new instance for the fully configured i18n
       const newInstance = createInstance();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (newInstance as any)
+      await(newInstance as any)
         .use(LanguageDetector)
         .use(initReactI18next)
         .init({
@@ -63,17 +66,19 @@ export function ClientI18nProvider({
               game: gameEn,
               leaderboard: leaderboardEn,
               settings: settingsEn,
+              header: headerEn,
             },
             ru: {
               home: homeRu,
               game: gameRu,
               leaderboard: leaderboardRu,
               settings: settingsRu,
+              header: headerRu,
             },
           },
           fallbackLng: "en",
           defaultNS: "home",
-          ns: ["home", "game", "leaderboard", "settings"],
+          ns: ["home", "game", "leaderboard", "settings", "header"],
         });
 
       setI18nInstance(newInstance);

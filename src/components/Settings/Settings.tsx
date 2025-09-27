@@ -84,7 +84,7 @@ export const Settings = () => {
             </button>
 
             <div className={c.header}>
-              <h2 className={c.title}>Settings</h2>
+              <h2 className={c.title}>{t("title")}</h2>
               <div className={c.userSection}>
                 <SignedIn>
                   <UserButton
@@ -123,7 +123,7 @@ export const Settings = () => {
                     variant="primary"
                     size="medium"
                   >
-                    Sign In
+                    {t("signIn")}
                   </SignInButton>
                 </SignedOut>
               </div>
@@ -131,7 +131,7 @@ export const Settings = () => {
 
             <div className={c.settings}>
               <div className={c.settingGroup}>
-                <div className={c.settingLabel}>Theme</div>
+                <div className={c.settingLabel}>{t("theme")}</div>
                 <div className={c.languageChange}>
                   <div className={c.languageToggle}>
                     <span
@@ -139,7 +139,7 @@ export const Settings = () => {
                         theme === "light" ? c.active : ""
                       }`}
                     >
-                      ☀️ Light
+                      {t("light")}
                     </span>
                     <label className={c.toggle}>
                       <input
@@ -163,14 +163,14 @@ export const Settings = () => {
                         theme === "dark" ? c.active : ""
                       }`}
                     >
-                      🌙 Dark
+                      {t("dark")}
                     </span>
                   </div>
                 </div>
               </div>
 
               <div className={c.settingGroup}>
-                <div className={c.settingLabel}>Language</div>
+                <div className={c.settingLabel}>{t("language")}</div>
                 <div className={c.themeChange}>
                   <div className={c.themeOptions}>
                     <label className={c.themeOption}>
@@ -213,18 +213,16 @@ export const Settings = () => {
                       onChange={handleColorChange}
                       className={c.colorInput}
                     />
-                    <span className={c.colorLabel}>
-                      Choose your preferred circle color
-                    </span>
+                    <span className={c.colorLabel}>{t("chooseColor")}</span>
                     <button onClick={resetColor} className={c.resetButton}>
-                      Reset
+                      {t("reset")}
                     </button>
                   </div>
                 </div>
               </div>
 
               <div className={c.preview}>
-                <div className={c.previewTitle}>Preview</div>
+                <div className={c.previewTitle}>{t("preview")}</div>
                 <div className={c.binary}>
                   <RadioCircle
                     index={0}

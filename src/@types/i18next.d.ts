@@ -2,6 +2,7 @@ import homeEn from "../locales/en/home.json";
 import gameEn from "../locales/en/game.json";
 import leaderboardEn from "../locales/en/leaderboard.json";
 import settingsEn from "../locales/en/settings.json";
+import headerEn from "../locales/en/header.json";
 
 declare module "i18next" {
   interface CustomTypeOptions {
@@ -11,6 +12,7 @@ declare module "i18next" {
       game: typeof gameEn;
       leaderboard: typeof leaderboardEn;
       settings: typeof settingsEn;
+      header: typeof headerEn;
     };
   }
 }
