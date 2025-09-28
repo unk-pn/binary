@@ -244,9 +244,14 @@
     gap: 0.25rem;
   }
 
+  .ctaSection {
+    flex-direction: column;
+  }
+
   .ctaButton {
     width: 100%;
     max-width: 300px;
+    display: block;
   }
 
   .features {
