@@ -1,3 +1,10 @@
 {
-  "pleaseSignIn": "Please sign in to play the game"
+  "title": "Binary Game",
+  "description": "Test your binary conversion skills in this fast-paced game. Convert decimal numbers to binary as quickly as possible to score points and climb the leaderboard!",
+  "pleaseSignIn": "Please sign in to play the game",
+  "bySigning": "By signing in, you can:",
+  "feature1": "Save your progress automatically",
+  "feature2": "Compete on global leaderboard",
+  "feature3": "Track your personal statistics",
+  "signIn": "Sign In"
 }

@@ -6,6 +6,9 @@ import { RadioCircle } from "@/components/RadioCircle/RadioCircle";
 import { useStorage } from "@/hooks/useStorage";
 import { SignedIn, SignedOut, SignInButton, useUser } from "@clerk/nextjs";
 import React, { useEffect, useState } from "react";
+import styles from "./page.module.css";
+import { useTranslation } from "react-i18next";
+import { PleaseSignIn } from "@/components/PleaseSignIn/PleaseSignIn";
 
 const GamePage = () => {
   const [start, setStart] = useState<boolean>(false);
@@ -21,6 +24,7 @@ const GamePage = () => {
   const storage = useStorage();
   const { user } = useUser();
   const RESET_DELAY = 400;
+  const { t } = useTranslation("game");
 
   const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
@@ -135,7 +139,7 @@ const GamePage = () => {
   }, [decimal, start, aim]);
 
   const handleCorrectAnswer = () => {
-    setTime((t) => Math.min(t + 3, 60));
+    setTime((t) => Math.min(t + 1, 60));
 
     setScore((s) => {
       const nextScore = s + 1;
@@ -164,15 +168,15 @@ const GamePage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       {gameOver && <GameOver score={score} />}
-      <div>Game Page</div>
-      <hr />
-      <HowToPlay />
-      <hr />
+      <section className={styles.hero}>
+        <h1 className={styles.title}>{t("title")}</h1>
+        <p className={styles.subtitle}>{t("description")}</p>
+      </section>
 
       <SignedIn>
-      <h1>Your record: {record}</h1>
+        <h1>Your record: {record}</h1>
         {!start ? (
           <div>Click Start game to begin.</div>
         ) : (
@@ -202,13 +206,14 @@ const GamePage = () => {
         )}
       </SignedIn>
       <SignedOut>
-        <div>
+        {/* <div>
           <h1>Please sign in to play the game</h1>
           <h2>
             By signing in, you can save your progress and compete with others!
           </h2>
           <SignInButton />
-        </div>
+        </div> */}
+        <PleaseSignIn />
       </SignedOut>
     </div>
   );
