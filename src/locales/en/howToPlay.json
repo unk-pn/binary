@@ -1,0 +1,9 @@
+{
+  "title": "How to Play",
+  "step1": "Your mission is to convert the decimal number into its binary representation before the time runs out.",
+  "step2": "Each round you will be presented with a random decimal number.",
+  "step3": "The binary code field will be displayed as a series of circles, each representing a bit (0 or 1). At the start of each round, all circles will be set to 0.",
+  "step4": "Tap the circle to toggle its value between 0 and 1.",
+  "step5": "Remember, accuracy and speed are key! The faster you convert the number, the higher your score. Good luck!",
+  "gotIt": "Got It!"
+}

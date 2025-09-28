@@ -11,7 +11,6 @@ export function ClientI18nProvider({
   children: React.ReactNode;
 }) {
   const [i18nInstance, setI18nInstance] = useState(() => {
-    // Create a minimal i18n instance for initial render
     const fallbackInstance = createInstance();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (fallbackInstance as any).use(initReactI18next).init({
@@ -22,18 +21,18 @@ export function ClientI18nProvider({
           leaderboard: {},
           settings: {},
           header: {},
+          howToPlay: {},
         },
       },
       fallbackLng: "en",
       defaultNS: "home",
-      ns: ["home", "game", "leaderboard", "settings", "header"],
+      ns: ["home", "game", "leaderboard", "settings", "header", "howToPlay"],
     });
     return fallbackInstance;
   });
 
   useEffect(() => {
     const initI18n = async () => {
-      // Import LanguageDetector dynamically only on client
       const LanguageDetector = (
         await import("i18next-browser-languagedetector")
       ).default;
@@ -45,6 +44,8 @@ export function ClientI18nProvider({
         .default;
       const settingsEn = (await import("../locales/en/settings.json")).default;
       const headerEn = (await import("../locales/en/header.json")).default;
+      const howToPlayEn = (await import("../locales/en/howToPlay.json")).default;
+
 
       const homeRu = (await import("../locales/ru/home.json")).default;
       const gameRu = (await import("../locales/ru/game.json")).default;
@@ -52,8 +53,8 @@ export function ClientI18nProvider({
         .default;
       const settingsRu = (await import("../locales/ru/settings.json")).default;
       const headerRu = (await import("../locales/ru/header.json")).default;
+      const howToPlayRu = (await import("../locales/ru/howToPlay.json")).default;
 
-      // Create a new instance for the fully configured i18n
       const newInstance = createInstance();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await(newInstance as any)
@@ -67,6 +68,7 @@ export function ClientI18nProvider({
               leaderboard: leaderboardEn,
               settings: settingsEn,
               header: headerEn,
+              howToPlay: howToPlayEn,
             },
             ru: {
               home: homeRu,
@@ -74,11 +76,12 @@ export function ClientI18nProvider({
               leaderboard: leaderboardRu,
               settings: settingsRu,
               header: headerRu,
+              howToPlay: howToPlayRu,
             },
           },
           fallbackLng: "en",
           defaultNS: "home",
-          ns: ["home", "game", "leaderboard", "settings", "header"],
+          ns: ["home", "game", "leaderboard", "settings", "header", "howToPlay"],
         });
 
       setI18nInstance(newInstance);
