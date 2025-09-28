@@ -47,15 +47,15 @@ const GamePage = () => {
           }
         });
 
-        const currUserId = user?.id;
-        const lastUserId = storage?.getItem("lastUserId");
-        if (currUserId && lastUserId && currUserId !== lastUserId) {
-          storage?.removeItem("record");
-        }
+      const currUserId = user?.id;
+      const lastUserId = storage?.getItem("lastUserId");
+      if (currUserId && lastUserId && currUserId !== lastUserId) {
+        storage?.removeItem("record");
+      }
 
-        if (currUserId) {
-          storage?.setItem("lastUserId", currUserId);
-        }
+      if (currUserId) {
+        storage?.setItem("lastUserId", currUserId);
+      }
     }
   }, [user?.id, storage]);
 
@@ -176,43 +176,43 @@ const GamePage = () => {
       </section>
 
       <SignedIn>
-        <h1>Your record: {record}</h1>
-        {!start ? (
-          <div>Click Start game to begin.</div>
-        ) : (
-          <div>Game started! You have {time} seconds left.</div>
-        )}
-        <button disabled={start} onClick={() => startGame()}>
-          Start game
-        </button>
-        {start && (
-          <div>
-            <button onClick={() => stopGame()}>Stop game</button>
-            <div>Score: {score}</div>
-            <div>Aim: {aim - decimal}</div>
-            <div style={{ display: "flex", gap: "10px" }}>
-              {binaryArr.map((_, index) => (
-                <RadioCircle
-                  key={index}
-                  index={index}
-                  onClick={handleClick}
-                  selected={binaryArr[index]}
-                />
-              ))}
-            </div>
-            <div>Binary: {binary}</div>
-            <div>Decimal: {isNaN(decimal) ? 0 : decimal}</div>
-          </div>
-        )}
+        <section className={styles.gameSection}>
+          <h1 className={styles.title2}>Your record: {record}</h1>
+
+          {!start && (
+            <button
+              disabled={start}
+              onClick={() => startGame()}
+              className={`${styles.startButton} ${styles.button}`}
+            >
+              Start game
+            </button>
+          )}
+          {start && (
+            <section className={styles.aimSection}>
+              <div className={styles.additionalInfo}>
+                <div className={styles.score}>Score: {score}</div>
+                <div className={styles.aim}>Aim: {aim - decimal}</div>
+                <div className={styles.time}>Time left: {time}</div>
+              </div>
+              <div className={styles.binaryRow}>
+                {binaryArr.map((_, index) => (
+                  <RadioCircle
+                    key={index}
+                    index={index}
+                    onClick={handleClick}
+                    selected={binaryArr[index]}
+                  />
+                ))}
+              </div>
+              <button onClick={() => stopGame()} className={`${styles.stopButton} ${styles.button}`}>
+                Stop game
+              </button>
+            </section>
+          )}
+        </section>
       </SignedIn>
       <SignedOut>
-        {/* <div>
-          <h1>Please sign in to play the game</h1>
-          <h2>
-            By signing in, you can save your progress and compete with others!
-          </h2>
-          <SignInButton />
-        </div> */}
         <PleaseSignIn />
       </SignedOut>
     </div>
