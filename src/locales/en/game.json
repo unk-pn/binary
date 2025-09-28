@@ -6,5 +6,11 @@
   "feature1": "Save your progress automatically",
   "feature2": "Compete on global leaderboard",
   "feature3": "Track your personal statistics",
-  "signIn": "Sign In"
+  "signIn": "Sign In",
+  "yourRecord": "Your Record:",
+  "startGame": "Start Game",
+  "score": "Score:",
+  "aim": "Aim:",
+  "time": "Time left:",
+  "stopGame": "Stop Game"
 }

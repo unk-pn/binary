@@ -177,7 +177,7 @@ const GamePage = () => {
 
       <SignedIn>
         <section className={styles.gameSection}>
-          <h1 className={styles.title2}>Your record: {record}</h1>
+          <h1 className={styles.title2}>{t("yourRecord")} {record}</h1>
 
           {!start && (
             <button
@@ -185,15 +185,15 @@ const GamePage = () => {
               onClick={() => startGame()}
               className={`${styles.startButton} ${styles.button}`}
             >
-              Start game
+              {t("startGame")}
             </button>
           )}
           {start && (
             <section className={styles.aimSection}>
               <div className={styles.additionalInfo}>
-                <div className={styles.score}>Score: {score}</div>
-                <div className={styles.aim}>Aim: {aim - decimal}</div>
-                <div className={styles.time}>Time left: {time}</div>
+                <div className={styles.score}>{t("score")} {score}</div>
+                <div className={styles.aim}>{t("aim")} {aim - decimal}</div>
+                <div className={styles.time}>{t("time")} {time}</div>
               </div>
               <div className={styles.binaryRow}>
                 {binaryArr.map((_, index) => (
@@ -206,7 +206,7 @@ const GamePage = () => {
                 ))}
               </div>
               <button onClick={() => stopGame()} className={`${styles.stopButton} ${styles.button}`}>
-                Stop game
+                {t("stopGame")}
               </button>
             </section>
           )}
