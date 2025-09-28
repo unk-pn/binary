@@ -12,5 +12,7 @@
   "score": "Score:",
   "aim": "Aim:",
   "time": "Time left:",
-  "stopGame": "Stop Game"
+  "stopGame": "Stop Game",
+  "gameOver": "Game Over!",
+  "finalScore": "Your final score is"
 }
