@@ -122,20 +122,22 @@ export const Settings = () => {
                     />
                   </SignedIn>
                   <SignedOut>
-                    <RegisterButton
-                      theme={theme as "light" | "dark"}
-                      variant="primary"
-                      size="medium"
-                    >
-                      {t("signUp")}
-                    </RegisterButton>
-                    <SignInButton
-                      theme={theme as "light" | "dark"}
-                      variant="primary"
-                      size="medium"
-                    >
-                      {t("signIn")}
-                    </SignInButton>
+                    <div className={c.authButtons}>
+                      <RegisterButton
+                        theme={theme as "light" | "dark"}
+                        variant="primary"
+                        size="medium"
+                      >
+                        {t("signUp")}
+                      </RegisterButton>
+                      <SignInButton
+                        theme={theme as "light" | "dark"}
+                        variant="primary"
+                        size="medium"
+                      >
+                        {t("signIn")}
+                      </SignInButton>
+                    </div>
                   </SignedOut>
                 </div>
               </div>

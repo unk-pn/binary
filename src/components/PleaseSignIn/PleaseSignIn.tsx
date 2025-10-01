@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./PleaseSignIn.module.css";
 import { SignInButton } from "../SignInButton/SignInButton";
 import { useTranslation } from "react-i18next";
+import { RegisterButton } from "../RegisterButton/RegisterButton";
 
 export const PleaseSignIn = () => {
   const { t } = useTranslation("game");
@@ -32,6 +33,7 @@ export const PleaseSignIn = () => {
 
       <div className={styles.buttonWrapper}>
         <SignInButton size="large">{t("signIn")}</SignInButton>
+        <RegisterButton size="large">{t("signUp")}</RegisterButton>
       </div>
     </div>
   );

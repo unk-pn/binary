@@ -64,10 +64,29 @@
 }
 
 .buttonWrapper {
+  width: 100%;
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
 }
 
-/* Responsive Design */
+.buttonWrapper > div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonWrapper > div button {
+  width: 100% !important;
+  justify-content: center !important;
+  font-size: 1rem !important;
+  flex: 1 !important;
+  text-align: center !important;
+}
+
 @media (max-width: 768px) {
   .wrapper {
     padding: 2rem 1.5rem;
@@ -124,5 +143,10 @@
   .feature {
     padding: 0.5rem 0.75rem;
     border-radius: 8px;
+  }
+
+  .buttonWrapper {
+    flex-direction: column;
+    gap: 0.75rem;
   }
 }

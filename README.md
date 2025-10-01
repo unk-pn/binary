@@ -292,17 +292,17 @@ npm start
 
 ### 🕒 Binary Clock
 <p align="center">
-  <img src="https://i.postimg.cc/9Xbp7wnb/binary-clock.png" alt="Binary Clock" width="45%">
+  <img src="https://i.postimg.cc/9Xbp7wnb/binary-clock.png" alt="Binary Clock">
 </p>
 
 ### 🎮 Game Interface
 <p align="center">
-  <img src="https://i.postimg.cc/fb3zxdCH/game-page.png" alt="Game Interface" width="45%">
+  <img src="https://i.postimg.cc/fb3zxdCH/game-page.png" alt="Game Interface">
 </p>
 
 ### 🏆 Leaderboard
 <p align="center">
-  <img src="https://i.postimg.cc/Cx2YL10L/leaderboard.png" alt="Leaderboard" width="45%">
+  <img src="https://i.postimg.cc/Cx2YL10L/leaderboard.png" alt="Leaderboard">
 </p>
 
 ### 📱 Mobile Responsive
