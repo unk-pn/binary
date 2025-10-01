@@ -10,7 +10,6 @@ import { RadioCircle } from "../RadioCircle/RadioCircle";
 import { SignInButton } from "../SignInButton/SignInButton";
 import { useTranslation } from "react-i18next";
 import { RegisterButton } from "../RegisterButton/RegisterButton";
-import { is } from '../../../.next/server/chunks/ssr/23f76_4e63034c._';
 
 export const Settings = () => {
   const [open, setOpen] = useState(false);
