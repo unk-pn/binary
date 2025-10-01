@@ -89,7 +89,9 @@ export const Settings = () => {
 
               <div className={`${c.header} ${isSignedIn ? c.signedIn : ""}`}>
                 <h2 className={c.title}>{t("title")}</h2>
-                <div className={c.userSection}>
+                <div
+                  className={`${c.userSection} ${isSignedIn ? c.userBtn : ""}`}
+                >
                   <SignedIn>
                     <UserButton
                       showName

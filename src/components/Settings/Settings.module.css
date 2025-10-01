@@ -89,6 +89,9 @@
 
 .signedIn {
   flex-direction: row;
+  justify-content: space-between;
+  align-items: space-between;
+
 }
 
 .userSection {
@@ -99,6 +102,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.userBtn {
+  width: auto !important;
 }
 
 .userSection > div {
