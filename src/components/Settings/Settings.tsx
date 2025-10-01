@@ -9,6 +9,8 @@ import { dark } from "@clerk/themes";
 import { RadioCircle } from "../RadioCircle/RadioCircle";
 import { SignInButton } from "../SignInButton/SignInButton";
 import { useTranslation } from "react-i18next";
+import { RegisterButton } from "../RegisterButton/RegisterButton";
+import { is } from '../../../.next/server/chunks/ssr/23f76_4e63034c._';
 
 export const Settings = () => {
   const [open, setOpen] = useState(false);
@@ -39,7 +41,6 @@ export const Settings = () => {
         console.error("❌ Failed to sync user:", error);
       }
     };
-
     if (isSignedIn && user?.id) {
       syncUser();
     }
@@ -70,6 +71,8 @@ export const Settings = () => {
     setPreviewArray(newArray);
   };
 
+  console.log(isSignedIn);
+
   return (
     <div className={c.page}>
       <button onClick={() => setOpen(true)} className={c.openBtn}>
@@ -85,7 +88,7 @@ export const Settings = () => {
                 ✖
               </button>
 
-              <div className={c.header}>
+              <div className={`${c.header} ${isSignedIn ? c.signedIn : ""}`}>
                 <h2 className={c.title}>{t("title")}</h2>
                 <div className={c.userSection}>
                   <SignedIn>
@@ -120,6 +123,13 @@ export const Settings = () => {
                     />
                   </SignedIn>
                   <SignedOut>
+                    <RegisterButton
+                      theme={theme as "light" | "dark"}
+                      variant="primary"
+                      size="medium"
+                    >
+                      {t("signUp")}
+                    </RegisterButton>
                     <SignInButton
                       theme={theme as "light" | "dark"}
                       variant="primary"
