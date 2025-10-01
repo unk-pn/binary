@@ -290,14 +290,24 @@ npm start
 
 ## Screenshots
 
+### 🕒 Binary Clock
 <p align="center">
-  <img src="https://via.placeholder.com/800x400/2563eb/ffffff?text=Binary+Clock" alt="Binary Clock" width="45%">
-  <img src="https://via.placeholder.com/800x400/059669/ffffff?text=Game+Interface" alt="Game Interface" width="45%">
+  <img src="https://i.postimg.cc/9Xbp7wnb/binary-clock.png" alt="Binary Clock" width="45%">
 </p>
 
+### 🎮 Game Interface
 <p align="center">
-  <img src="https://via.placeholder.com/800x400/dc2626/ffffff?text=Leaderboard" alt="Leaderboard" width="45%">
-  <img src="https://via.placeholder.com/800x400/7c3aed/ffffff?text=Mobile+View" alt="Mobile View" width="45%">
+  <img src="https://i.postimg.cc/fb3zxdCH/game-page.png" alt="Game Interface" width="45%">
+</p>
+
+### 🏆 Leaderboard
+<p align="center">
+  <img src="https://i.postimg.cc/Cx2YL10L/leaderboard.png" alt="Leaderboard" width="45%">
+</p>
+
+### 📱 Mobile Responsive
+<p align="center">
+  <img src="https://i.postimg.cc/RhS2T5mD/mobile.png" alt="Mobile View" width="300px">
 </p>
 
 ## Acknowledgments
