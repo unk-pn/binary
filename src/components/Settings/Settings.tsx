@@ -10,6 +10,8 @@ import { RadioCircle } from "../RadioCircle/RadioCircle";
 import { SignInButton } from "../SignInButton/SignInButton";
 import { useTranslation } from "react-i18next";
 import { RegisterButton } from "../RegisterButton/RegisterButton";
+import HowToPlay from "@/components/HowToPlay/HowToPlay";
+
 
 export const Settings = () => {
   const [open, setOpen] = useState(false);
@@ -266,6 +268,9 @@ export const Settings = () => {
                       onClick={() => handlePreviewClick(3)}
                     />
                   </div>
+                </div>
+                <div>
+                  <HowToPlay />
                 </div>
               </div>
             </div>

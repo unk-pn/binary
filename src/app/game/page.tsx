@@ -1,7 +1,6 @@
 "use client";
 
 import { GameOver } from "@/components/GameOver/GameOver";
-import HowToPlay from "@/components/HowToPlay/HowToPlay";
 import { RadioCircle } from "@/components/RadioCircle/RadioCircle";
 import { useStorage } from "@/hooks/useStorage";
 import { SignedIn, SignedOut, SignInButton, useUser } from "@clerk/nextjs";
